@@ -40,10 +40,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Added CharacterController to PlayerController");
         }
         
-        if (GetComponent<SphereCollider>() != null)
-        {
-            Debug.LogWarning("PlayerController: Remove SphereCollider - CharacterController will handle collision");
-        }
+        
     }
     
     void Update()
