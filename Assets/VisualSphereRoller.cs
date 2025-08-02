@@ -3,18 +3,12 @@ using UnityEngine;
 public class VisualSphereRoller : MonoBehaviour
 {
     [Header("Rolling Settings")]
-    public float rollSpeed = 360f;
+    public float sphereRadius = 0.5f; // Radius of your sphere (adjust to match your sphere's actual radius)
     
-    [Header("Rolling Axes (check to enable rotation)")]
-    public bool rollOnX = true;  // Forward/Backward (W/S)
-    public bool rollOnY = false; // Up/Down rotation
-    public bool rollOnZ = true;  // Left/Right (A/D)
+    [Header("Debug")]
+    public bool showDebugInfo = false;
     
-    [Header("Axis Multipliers (negative to reverse)")]
-    public float xAxisMultiplier = -1f;  // Forward/Backward multiplier
-    public float yAxisMultiplier = 0f;   // Up/Down multiplier  
-    public float zAxisMultiplier = 1f;   // Left/Right multiplier
-    
+    private Vector3 lastPosition;
     private Vector2 moveInput;
     
     void Start()
@@ -30,21 +24,54 @@ public class VisualSphereRoller : MonoBehaviour
         {
             Debug.LogWarning("VisualSphereRoller: This GameObject should not have a Collider. The PlayerController handles physics.");
         }
+        
+        // Initialize last position
+        lastPosition = transform.parent.position;
     }
     
     void Update()
     {
-        // Calculate rotation for each axis
-        float xRotation = rollOnX ? moveInput.y * xAxisMultiplier * rollSpeed * Time.deltaTime : 0f;
-        float yRotation = rollOnY ? moveInput.x * yAxisMultiplier * rollSpeed * Time.deltaTime : 0f;
-        float zRotation = rollOnZ ? moveInput.x * zAxisMultiplier * rollSpeed * Time.deltaTime : 0f;
+        // Get the current position of the parent (the actual player position)
+        Vector3 currentPosition = transform.parent.position;
         
-        // Apply rotation - now rotates around its own center which stays fixed relative to parent
-        transform.Rotate(xRotation, yRotation, zRotation);
+        // Calculate the movement delta
+        Vector3 deltaMovement = currentPosition - lastPosition;
+        
+        // Only roll if there's actual movement
+        if (deltaMovement.magnitude > 0.001f)
+        {
+            // Calculate rotation based on actual movement
+            // For a sphere rolling on the ground, we need to rotate around axes perpendicular to movement
+            
+            // Forward/backward movement rotates around the X axis (local right)
+            float xRotation = deltaMovement.z / sphereRadius * Mathf.Rad2Deg;
+            
+            // Left/right movement rotates around the Z axis (local forward)  
+            float zRotation = -deltaMovement.x / sphereRadius * Mathf.Rad2Deg;
+            
+            // Apply the rotation in world space to avoid axis drift
+            transform.Rotate(Vector3.right, xRotation, Space.World);
+            transform.Rotate(Vector3.forward, zRotation, Space.World);
+            
+            if (showDebugInfo)
+            {
+                Debug.Log($"Movement: {deltaMovement}, X Rot: {xRotation:F2}, Z Rot: {zRotation:F2}");
+            }
+        }
+        
+        // Update last position
+        lastPosition = currentPosition;
     }
     
     public void SetMoveInput(Vector2 input)
     {
         moveInput = input;
+    }
+    
+    // Helper method to reset the sphere's rotation if needed
+    [ContextMenu("Reset Rotation")]
+    public void ResetRotation()
+    {
+        transform.rotation = Quaternion.identity;
     }
 }

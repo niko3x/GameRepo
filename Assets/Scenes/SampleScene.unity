@@ -172,6 +172,7 @@ MonoBehaviour:
   radius: 100
   background: {fileID: 1148062771}
   handle: {fileID: 306036474}
+  touchArea: {fileID: 124689778}
 --- !u!114 &124689780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,13 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3623ddf1d673daa999a2d71b9585771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollSpeed: 360
-  rollOnX: 1
-  rollOnY: 0
-  rollOnZ: 1
-  xAxisMultiplier: 1
-  yAxisMultiplier: 0
-  zAxisMultiplier: -1
+  sphereRadius: 0.5
+  showDebugInfo: 0
 --- !u!23 &138599600
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -342,15 +338,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306036473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000116757565}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1208435091}
+  m_Father: {fileID: 1148062771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -423, y: -144}
+  m_AnchoredPosition: {x: 0, y: 0.000045776367}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &306036475
@@ -806,7 +802,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 306036474}
   m_Father: {fileID: 1208435091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1055,7 +1052,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1148062771}
-  - {fileID: 306036474}
   - {fileID: 124689778}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
