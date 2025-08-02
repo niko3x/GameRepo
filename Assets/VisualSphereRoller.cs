@@ -34,15 +34,13 @@ public class VisualSphereRoller : MonoBehaviour
     
     void Update()
     {
-        // Calculate rotation for each axis using WORLD SPACE axes
+        // Calculate rotation for each axis
         float xRotation = rollOnX ? moveInput.y * xAxisMultiplier * rollSpeed * Time.deltaTime : 0f;
         float yRotation = rollOnY ? moveInput.x * yAxisMultiplier * rollSpeed * Time.deltaTime : 0f;
         float zRotation = rollOnZ ? moveInput.x * zAxisMultiplier * rollSpeed * Time.deltaTime : 0f;
         
-        // Apply rotation in WORLD SPACE so axes don't get fucked up
-        if (xRotation != 0) transform.Rotate(Vector3.right, xRotation, Space.World);
-        if (yRotation != 0) transform.Rotate(Vector3.up, yRotation, Space.World);
-        if (zRotation != 0) transform.Rotate(Vector3.forward, zRotation, Space.World);
+        // Apply rotation - now rotates around its own center which stays fixed relative to parent
+        transform.Rotate(xRotation, yRotation, zRotation);
     }
     
     public void SetMoveInput(Vector2 input)
