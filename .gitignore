@@ -6,6 +6,7 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
+[Vv]env/
 
 # Visual Studio / JetBrains Rider
 .vscode/
