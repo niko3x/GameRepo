@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Item
+  - AreaCenter
+  - ArenaCenter
   layers:
   - Default
   - TransparentFX

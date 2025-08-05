@@ -97,8 +97,8 @@ MonoBehaviour:
     - line: '|   androidResizeableActivity: 1'
     - line: '|   androidDefaultWindowWidth: 1920'
     - line: '|   androidDefaultWindowHeight: 1080'
-    - line: '|   androidMinimumWindowWidth: 400'
-    - line: '|   androidMinimumWindowHeight: 300'
+    - line: '|   androidMinimumWindowWidth: 100'
+    - line: '|   androidMinimumWindowHeight: 75'
     - line: '|   androidFullscreenMode: 1'
     - line: '|   androidAutoRotationBehavior: 1'
     - line: '|   androidPredictiveBackSupport: 1'
@@ -539,7 +539,10 @@ MonoBehaviour:
     - line: '|       m_Height: 720'
     - line: '|       m_Kind: 1'
     - line: '|       m_SubKind: '
-    - line: '|   m_BuildTargetBatching: []'
+    - line: '|   m_BuildTargetBatching:'
+    - line: '|   - m_BuildTarget: Android'
+    - line: '|     m_StaticBatching: 1'
+    - line: '|     m_DynamicBatching: 0'
     - line: '|   m_BuildTargetShaderSettings: []'
     - line: '|   m_BuildTargetGraphicsJobs: []'
     - line: '|   m_BuildTargetGraphicsJobMode: []'
@@ -978,7 +981,7 @@ MonoBehaviour:
         m_ExportAsGoogleAndroidProject: 0
         m_DebugSymbolLevel: 1
         m_DebugSymbolFormat: 5
-        m_CurrentDeploymentTargetId: xofufyrgm77d8hzt
+        m_CurrentDeploymentTargetId: __builtin__target_all
         m_BuildType: 2
         m_BuildAppBundle: 0
         m_IPAddressToConnect: 
